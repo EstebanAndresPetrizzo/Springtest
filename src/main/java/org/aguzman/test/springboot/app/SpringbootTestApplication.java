@@ -1,4 +1,4 @@
-package org.andres.test.springboot.app;
+package org.aguzman.test.springboot.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

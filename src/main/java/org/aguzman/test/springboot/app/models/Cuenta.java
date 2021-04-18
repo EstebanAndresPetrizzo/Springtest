@@ -1,12 +1,19 @@
-package org.andres.test.springboot.app.model;
+package org.aguzman.test.springboot.app.models;
 
-import org.andres.test.springboot.app.exception.DineroInsuficienteException;
+import org.aguzman.test.springboot.app.exceptions.DineroInsuficienteException;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+@Entity
+@Table(name="cuentas")
 public class Cuenta {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String persona;
     private BigDecimal saldo;
 
@@ -17,18 +24,6 @@ public class Cuenta {
         this.id = id;
         this.persona = persona;
         this.saldo = saldo;
-    }
-
-    public void Debito(BigDecimal monto){
-        BigDecimal nuevoSaldo = this.saldo.subtract(monto);
-        if (nuevoSaldo.compareTo(BigDecimal.ZERO) < 0){
-            throw new DineroInsuficienteException("Dinero Insuficiente en la cuenta.");
-        }
-        this.saldo = nuevoSaldo;
-    }
-
-    public void Credito(BigDecimal monto){
-        this.saldo = this.saldo.add(monto);
     }
 
     public Long getId() {
@@ -53,6 +48,18 @@ public class Cuenta {
 
     public void setSaldo(BigDecimal saldo) {
         this.saldo = saldo;
+    }
+
+    public void debito(BigDecimal monto) {
+        BigDecimal nuevoSaldo = this.saldo.subtract(monto);
+        if(nuevoSaldo.compareTo(BigDecimal.ZERO) < 0){
+            throw new DineroInsuficienteException("Dinero insuficiente en la cuenta.");
+        }
+        this.saldo = nuevoSaldo;
+    }
+
+    public void credito(BigDecimal monto) {
+        this.saldo = saldo.add(monto);
     }
 
     @Override
