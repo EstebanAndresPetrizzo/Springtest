@@ -1,8 +1,17 @@
 package org.andres.test.springboot.app.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name ="Bancos")
 public class Banco {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nombre;
+
+    @Column(name = "total_transferencia")
     private Integer totalTansferencia;
 
     public Banco() {

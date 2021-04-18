@@ -4,7 +4,7 @@ import org.andres.test.springboot.app.model.Cuenta;
 
 import java.math.BigDecimal;
 
-public interface CuentaService {
+public interface CuentaService{
     Cuenta findById(Long id);
 
     int revisarTotalTransferencias(Long bancoId);

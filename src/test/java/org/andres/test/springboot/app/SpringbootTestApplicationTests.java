@@ -2,6 +2,7 @@ package org.andres.test.springboot.app;
 
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.andres.test.springboot.app.Datos.*;
 
 import org.andres.test.springboot.app.exception.DineroInsuficienteException;
 import org.andres.test.springboot.app.model.Banco;
@@ -15,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.stubbing.OngoingStubbing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -34,9 +36,9 @@ class SpringbootTestApplicationTests {
 
 	@Test
 	void contextLoads() {
-		when(cuentaRepository.findById(1L)).thenReturn(Datos.CUENTA_001);
-		when(cuentaRepository.findById(2L)).thenReturn(Datos.CUENTA_002);
-		when(bancoRepository.findById(1L)).thenReturn(Datos.BANCO);
+		when(cuentaRepository.findById(1L)).thenReturn(crearCuenta001());
+		when(cuentaRepository.findById(2L)).thenReturn(crearCuenta002());
+		when(bancoRepository.findById(1L)).thenReturn(crearBanco());
 
 		BigDecimal saldoOrigen = service.revisarSaldo(1L);
 		BigDecimal saldoDestino = service.revisarSaldo(2L);
@@ -54,16 +56,16 @@ class SpringbootTestApplicationTests {
 		assertEquals(1, total);
 		verify(cuentaRepository, times(3)).findById(1L);
 		verify(cuentaRepository, times(3)).findById(2L);
-		verify(cuentaRepository,times(2)).update(any(Cuenta.class));
+		verify(cuentaRepository,times(2)).save(any(Cuenta.class));
 		verify(bancoRepository, times(2)).findById(1L);
-		verify(bancoRepository).update(any(Banco.class));
+		verify(bancoRepository).save(any(Banco.class));
 	}
 
 	@Test
 	void contextLoads2() {
-		when(cuentaRepository.findById(1L)).thenReturn(Datos.CUENTA_001);
-		when(cuentaRepository.findById(2L)).thenReturn(Datos.CUENTA_002);
-		when(bancoRepository.findById(1L)).thenReturn(Datos.BANCO);
+		when(cuentaRepository.findById(1L)).thenReturn(crearCuenta001());
+		when(cuentaRepository.findById(2L)).thenReturn(crearCuenta001());
+		when(bancoRepository.findById(1L)).thenReturn(crearBanco());
 
 		BigDecimal saldoOrigen = service.revisarSaldo(1L);
 		BigDecimal saldoDestino = service.revisarSaldo(2L);
@@ -82,9 +84,9 @@ class SpringbootTestApplicationTests {
 		int total = service.revisarTotalTransferencias(1L);
 		assertEquals(1, total);
 
-		verify(cuentaRepository,never()).update(any(Cuenta.class));
+		verify(cuentaRepository,never()).save(any(Cuenta.class));
 		verify(bancoRepository, times(2)).findById(1L);
-		verify(bancoRepository).update(any(Banco.class));
+		verify(bancoRepository).save(any(Banco.class));
 
 		verify(cuentaRepository, times(5)).findById(anyLong());
 		verify(cuentaRepository, never()).findAll();
