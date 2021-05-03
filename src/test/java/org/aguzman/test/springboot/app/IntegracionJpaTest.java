@@ -1,5 +1,7 @@
 package org.aguzman.test.springboot.app;
 
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 import org.aguzman.test.springboot.app.models.Cuenta;
 import org.aguzman.test.springboot.app.repositories.CuentaRepository;
 import org.junit.jupiter.api.Test;
@@ -11,7 +13,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DataJpaTest
 public class IntegracionJpaTest {
@@ -36,7 +38,7 @@ public class IntegracionJpaTest {
     @Test
     void testFindByPersonaThrowException() {
         Optional<Cuenta> cuenta = cuentaRepository.findByPersona("Rod");
-        assertThrows(NoSuchElementException.class, cuenta::orElseThrow);
+        assertThrows(NoSuchElementException.class, cuenta::orElseThrow);//nombre de refecrencia, se abrevia la exprecion labda
         assertFalse(cuenta.isPresent());
     }
 
