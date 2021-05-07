@@ -1,4 +1,4 @@
-package org.aguzman.test.springboot.app.models;
+package org.andres.test.springboot.app.models;
 
 import javax.persistence.*;
 

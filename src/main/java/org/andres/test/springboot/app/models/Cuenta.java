@@ -1,6 +1,6 @@
-package org.aguzman.test.springboot.app.models;
+package org.andres.test.springboot.app.models;
 
-import org.aguzman.test.springboot.app.exceptions.DineroInsuficienteException;
+import org.andres.test.springboot.app.exceptions.DineroInsuficienteException;
 
 import javax.persistence.*;
 import java.math.BigDecimal;

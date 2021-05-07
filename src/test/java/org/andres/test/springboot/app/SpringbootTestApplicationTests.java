@@ -1,20 +1,16 @@
-package org.aguzman.test.springboot.app;
+package org.andres.test.springboot.app;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-import static org.aguzman.test.springboot.app.Datos.*;
 
-import org.aguzman.test.springboot.app.exceptions.DineroInsuficienteException;
-import org.aguzman.test.springboot.app.models.Banco;
-import org.aguzman.test.springboot.app.models.Cuenta;
-import org.aguzman.test.springboot.app.repositories.BancoRepository;
-import org.aguzman.test.springboot.app.repositories.CuentaRepository;
-import org.aguzman.test.springboot.app.services.CuentaService;
-import org.aguzman.test.springboot.app.services.CuentaServiceImpl;
+import org.andres.test.springboot.app.exceptions.DineroInsuficienteException;
+import org.andres.test.springboot.app.models.Banco;
+import org.andres.test.springboot.app.models.Cuenta;
+import org.andres.test.springboot.app.repositories.BancoRepository;
+import org.andres.test.springboot.app.repositories.CuentaRepository;
+import org.andres.test.springboot.app.services.CuentaService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -45,9 +41,9 @@ class SpringbootTestApplicationTests {
 
 	@Test
 	void contextLoads() {
-		when(cuentaRepository.findById(1L)).thenReturn(crearCuenta001());
-		when(cuentaRepository.findById(2L)).thenReturn(crearCuenta002());
-		when(bancoRepository.findById(1L)).thenReturn(crearBanco());
+		when(cuentaRepository.findById(1L)).thenReturn(Datos.crearCuenta001());
+		when(cuentaRepository.findById(2L)).thenReturn(Datos.crearCuenta002());
+		when(bancoRepository.findById(1L)).thenReturn(Datos.crearBanco());
 
 		BigDecimal saldoOrigen = service.revisarSaldo(1L);
 		BigDecimal saldoDestino = service.revisarSaldo(2L);
@@ -78,9 +74,9 @@ class SpringbootTestApplicationTests {
 
 	@Test
 	void contextLoads2() {
-		when(cuentaRepository.findById(1L)).thenReturn(crearCuenta001());
-		when(cuentaRepository.findById(2L)).thenReturn(crearCuenta002());
-		when(bancoRepository.findById(1L)).thenReturn(crearBanco());
+		when(cuentaRepository.findById(1L)).thenReturn(Datos.crearCuenta001());
+		when(cuentaRepository.findById(2L)).thenReturn(Datos.crearCuenta002());
+		when(bancoRepository.findById(1L)).thenReturn(Datos.crearBanco());
 
 		BigDecimal saldoOrigen = service.revisarSaldo(1L);
 		BigDecimal saldoDestino = service.revisarSaldo(2L);
@@ -113,7 +109,7 @@ class SpringbootTestApplicationTests {
 
 	@Test
 	void contextLoads3() {
-		when(cuentaRepository.findById(1L)).thenReturn(crearCuenta001());
+		when(cuentaRepository.findById(1L)).thenReturn(Datos.crearCuenta001());
 
 		Cuenta cuenta1 = service.findById(1L);
 		Cuenta cuenta2 = service.findById(1L);

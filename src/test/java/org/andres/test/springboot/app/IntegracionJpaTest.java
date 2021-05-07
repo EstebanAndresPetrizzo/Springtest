@@ -1,9 +1,9 @@
-package org.aguzman.test.springboot.app;
+package org.andres.test.springboot.app;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-import org.aguzman.test.springboot.app.models.Cuenta;
-import org.aguzman.test.springboot.app.repositories.CuentaRepository;
+
+import org.andres.test.springboot.app.models.Cuenta;
+import org.andres.test.springboot.app.repositories.CuentaRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
