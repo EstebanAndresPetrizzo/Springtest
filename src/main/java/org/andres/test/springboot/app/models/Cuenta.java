@@ -69,9 +69,4 @@ public class Cuenta {
         Cuenta cuenta = (Cuenta) o;
         return Objects.equals(id, cuenta.id) && Objects.equals(persona, cuenta.persona) && Objects.equals(saldo, cuenta.saldo);
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, persona, saldo);
-    }
 }
