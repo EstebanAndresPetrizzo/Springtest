@@ -11,9 +11,9 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
-import static org.springframework.http.HttpStatus.CREATED;
-import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.http.HttpStatus.*;
 
 @RestController
 @RequestMapping("/api/cuentas")
@@ -30,8 +30,14 @@ public class CuentaController {
 
     @GetMapping("/{id}")//{} = atributo variable
     @ResponseStatus(OK)
-    public Cuenta detalle(@PathVariable Long id){//metodo manejador de las peticiones del cliente
-        return cuentaService.findById(id);
+    public ResponseEntity<?> detalle(@PathVariable Long id){//metodo manejador de las peticiones del cliente
+        Cuenta cuenta = null;
+        try {
+            cuenta = cuentaService.findById(id);
+        }catch (NoSuchElementException e){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(cuenta);
     }
 
     @PostMapping
@@ -55,5 +61,11 @@ public class CuentaController {
         response.put("transaccion", dto);
 
         return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(NO_CONTENT)
+    public void eliminar(@PathVariable Long id){
+        cuentaService.deleteById(id);
     }
 }

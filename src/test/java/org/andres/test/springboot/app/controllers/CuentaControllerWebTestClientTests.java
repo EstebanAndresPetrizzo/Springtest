@@ -1,6 +1,5 @@
 package org.andres.test.springboot.app.controllers;
 
-<<<<<<< HEAD
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -10,12 +9,10 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-=======
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.andres.test.springboot.app.models.TransaccionDto;
 import org.junit.jupiter.api.Test;
->>>>>>> origin/Actualizacion
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -24,10 +21,7 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-<<<<<<< HEAD
 import java.util.List;
-=======
->>>>>>> origin/Actualizacion
 
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.*;
 import static org.hamcrest.Matchers.*;
@@ -38,10 +32,7 @@ import static org.junit.jupiter.api.Assertions.*;
 //esto levanta un servidor real
 //aquí vamos a probar sin mock
 //para probar este test se debe levantar la aplicacion
-<<<<<<< HEAD
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)//ordenamos los test por anotation
-=======
->>>>>>> origin/Actualizacion
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 class CuentaControllerWebTestClientTests {
 
@@ -52,10 +43,7 @@ class CuentaControllerWebTestClientTests {
     private ObjectMapper objectMapper;
 
     @Test
-<<<<<<< HEAD
     @Order(1)
-=======
->>>>>>> origin/Actualizacion
     void testTransferir() {
         //Given
         TransaccionDto dto = new TransaccionDto();
@@ -82,10 +70,7 @@ class CuentaControllerWebTestClientTests {
     }
 
     @Test
-<<<<<<< HEAD
     @Order(2)
-=======
->>>>>>> origin/Actualizacion
     void testTransferir2() {
         //Given
         TransaccionDto dto = new TransaccionDto();
@@ -115,7 +100,6 @@ class CuentaControllerWebTestClientTests {
                     }
                 });
     }
-<<<<<<< HEAD
 
     @Test
     @Order(3)
@@ -216,8 +200,26 @@ class CuentaControllerWebTestClientTests {
                     assertEquals("Pepa", c.getPersona());
                     assertEquals("3500", c.getSaldo().toPlainString());
                 });
-
     }
-=======
->>>>>>> origin/Actualizacion
+
+    @Test
+    @Order(9)
+    void testEliminar() {
+        client.get().uri("api/cuentas").exchange()
+                .expectBodyList(Cuenta.class)
+                .hasSize(4);
+
+        client.delete().uri("api/cuentas/3")
+                .exchange()
+                .expectStatus().isNoContent()
+                .expectBody().isEmpty();
+
+        client.get().uri("api/cuentas").exchange()
+                .expectBodyList(Cuenta.class)
+                .hasSize(3);
+
+        client.get().uri("api/cuentas/3").exchange()
+                //.expectStatus().is5xxServerError();//si devuelve error 500
+                .expectStatus().isNotFound();
+    }
 }
