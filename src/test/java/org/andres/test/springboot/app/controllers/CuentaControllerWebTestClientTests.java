@@ -5,10 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.andres.test.springboot.app.models.Cuenta;
 import org.andres.test.springboot.app.models.TransaccionDto;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.*;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.andres.test.springboot.app.models.TransaccionDto;
@@ -32,6 +29,7 @@ import static org.junit.jupiter.api.Assertions.*;
 //esto levanta un servidor real
 //aquí vamos a probar sin mock
 //para probar este test se debe levantar la aplicacion
+@Tag("integracion_wc")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)//ordenamos los test por anotation
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 class CuentaControllerWebTestClientTests {
